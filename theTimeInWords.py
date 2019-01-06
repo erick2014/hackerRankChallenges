@@ -81,9 +81,9 @@ def timeInWords(h, m):
         return "half past "+getTimeInLetters(h)
     elif m == 45:
         return "quarter to "+getTimeInLetters(h+1)
-    elif m > 0 and m < 40:
+    elif m > 0 and m < 30:
         return getTimeInLetters(m) + ' ' + getMinutesMessage(m) + ' past '+getTimeInLetters(h)
-    elif m >= 40:
+    elif m > 30 or m >= 40:
         minutesRemaining = 60 - m
         return getTimeInLetters(minutesRemaining) + ' ' + getMinutesMessage(m) + ' to ' + getTimeInLetters(h+1)
 
