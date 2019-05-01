@@ -29,15 +29,11 @@ def climbingLeaderboard(scores, aliceScores):
     currentRankingPositions = getRankingsFromScores(scores)
 
     for aliceScoreIndex in range(len(aliceScores)):
-
         aliceScore = aliceScores[aliceScoreIndex]
         continueLooping = True
         
         while continueLooping:
-
-            if lowerScoreRankingPos < 0:
-                break;
-
+        
             if lowerScoreRankingPos == 0 and aliceScore < scores[lowerScoreRankingPos]:
                 aliceRankings.append(currentRankingPositions[lowerScoreRankingPos+1])
 
@@ -45,8 +41,8 @@ def climbingLeaderboard(scores, aliceScores):
                 continueLooping = False
                 aliceRankings.append(1)
                 break
-            
-            if aliceScore > scores[lowerScoreRankingPos]:
+           
+            if aliceScore > scores[lowerScoreRankingPos]:  
                 lowerScoreRankingPos = lowerScoreRankingPos -1
 
             elif aliceScore == scores[lowerScoreRankingPos]:
@@ -57,7 +53,7 @@ def climbingLeaderboard(scores, aliceScores):
             else:
                 if lowerScoreRankingPos > 0:
                     aliceRankings.append(currentRankingPositions[lowerScoreRankingPos]+1)
-                    
+                
                 continueLooping = False
 
     return aliceRankings
