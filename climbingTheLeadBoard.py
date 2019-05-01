@@ -25,20 +25,27 @@ def getRankingsFromScores(scores):
 def climbingLeaderboard(scores, aliceScores):
     aliceRankings = []
     continueLooping = True
-    scoresCounter = len(scores)-1
-    lowerScoreRankingPos = scoresCounter
-
+    lowerScoreRankingPos = len(scores)-1
     currentRankingPositions = getRankingsFromScores(scores)
 
-    for aliceScore in aliceScores:
+    for aliceScoreIndex in range(len(aliceScores)):
+
+        aliceScore = aliceScores[aliceScoreIndex]
         continueLooping = True
+        
         while continueLooping:
-           
-            if lowerScoreRankingPos == 0:
+
+            if lowerScoreRankingPos < 0:
+                break;
+
+            if lowerScoreRankingPos == 0 and aliceScore < scores[lowerScoreRankingPos]:
+                aliceRankings.append(currentRankingPositions[lowerScoreRankingPos+1])
+
+            elif lowerScoreRankingPos == 0:
                 continueLooping = False
                 aliceRankings.append(1)
                 break
-
+            
             if aliceScore > scores[lowerScoreRankingPos]:
                 lowerScoreRankingPos = lowerScoreRankingPos -1
 
@@ -48,7 +55,9 @@ def climbingLeaderboard(scores, aliceScores):
                 continueLooping = False
 
             else:
-                aliceRankings.append(currentRankingPositions[lowerScoreRankingPos]+1)
+                if lowerScoreRankingPos > 0:
+                    aliceRankings.append(currentRankingPositions[lowerScoreRankingPos]+1)
+                    
                 continueLooping = False
 
     return aliceRankings
@@ -91,7 +100,7 @@ scoresInFile.close()
 # aliceScores = [5,25,50,120]
 
 result = climbingLeaderboard(scores, aliceScores)
-print(result)
+##print(result)
 
 # [100,100,50,40,40,30,20,10]
 # [1, 1, 2, 3, 3, 4, 5]
