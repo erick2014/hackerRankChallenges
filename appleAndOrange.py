@@ -25,36 +25,32 @@ def countApplesAndOranges(startingPointSam, endingPointSam, appleTreePoint, oran
     print(applesNearSamHouse)
     print(orangesNearSamHouse)
     
+'''
+    demo input data to test
+    7 11
+    5 15
+    3 2
+    -2 2 1
+    5 -6
+'''
 
 if __name__ == '__main__':
-    # samHousePoint = input().split()
+    samHousePoint = input().split()
 
-    # startingPointSam = int(samHousePoint[0])
-    startingPointSam = 7
+    startingPointSam = int(samHousePoint[0])
+    endingPointSam = int(samHousePoint[1])
 
-    #endingPointSam = int(samHousePoint[1])
-    endingPointSam = 11
+    TreePoints = input().split()
 
-    #TreePoints = input().split()
+    appleTreePoint = int(TreePoints[0])
+    orangeTreePoint = int(TreePoints[1])
 
-    # appleTreePoint = int(TreePoints[0])
-    appleTreePoint = 5
+    fruitsQuantity = input().split()
 
-    # orangeTreePoint = int(TreePoints[1])
-    orangeTreePoint = 15
+    appleTreeFruitsQuantity = int(fruitsQuantity[0])
+    orangeTreeFruitsQuantity = int(fruitsQuantity[1])
 
-    #fruitsQuantity = input().split()
-
-    #appleTreeFruitsQuantity = int(fruitsQuantity[0])
-    appleTreeFruitsQuantity = 3
-
-    #orangeTreeFruitsQuantity = int(fruitsQuantity[1])
-    orangeTreeFruitsQuantity = 2
-
-    # apples = list(map(int, input().rstrip().split()))
-    apples = [-2,2,1]
-
-    #oranges = list(map(int, input().rstrip().split()))
-    oranges = [5,-6]
+    apples = list(map(int, input().rstrip().split()))
+    oranges = list(map(int, input().rstrip().split()))
 
     countApplesAndOranges(startingPointSam, endingPointSam, appleTreePoint, orangeTreePoint, apples, oranges)
