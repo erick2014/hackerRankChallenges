@@ -19,19 +19,30 @@ const calculateArea = (shape, values) => {
 
     return new Promise((resolve, reject) => {
         const shapeName = shape.toLowerCase();
-        const shapeIsValid = allowedShapes.indexOf(shapeName);
-        const result = 0
+        let result = null;
 
-        if (shapeIsValid === -1) {
-            return reject(-1);
+        if (shapeName === allowedShapes[0]) {
+            result = values[0] * values[0];
         }
 
-        if (shapeName === 'square') {
-            result = values[0] * values[0];
-            resolve(result);
+        if (shapeName === allowedShapes[1]) {
+            result = values[0] * values[1];
+        }
+
+        if (shapeName === allowedShapes[2]) {
+            result = 3.14 * (values[0] * values[0]);
+        }
+
+        if (shapeName === allowedShapes[3]) {
+            result = 0.5 * (values[0] * values[1]);
+        }
+
+        if (result !== null) {
+            return resolve(result.toFixed(2));
+        } else {
+            reject(-1);
         }
     })
-
 }
 
 let getAreas = (shapes, sizesForEachShape) => {
