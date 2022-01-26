@@ -107,6 +107,3 @@ for i in tests:
     result = findTargetNumber(testArray,testTargetSum)
     print("my output= {}".format(result))
     print("")
-
-print(findTargetNumber([1, 2, 3, 4, 5, 6, 7, 8, 9, 15],18))
-
