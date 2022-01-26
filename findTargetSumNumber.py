@@ -79,7 +79,12 @@ def findTargetNumberFirstApproach(array,targetSum):
 
     return []
 
-# Solution works as expected
+"""
+    Complexity: 
+        Time=O(N)
+        Space=O(N)
+    Solution works as expected
+"""
 def findTargetNumber(array,targetSum):
     remindersDict = {}
     firstNumber = array[0]
