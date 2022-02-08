@@ -19,22 +19,20 @@
   Sample Output
   [-1, 11]
 """
+
 def getTestCases():
     return {
         1: {
             "array": [3, 5, -4, 8, 11, 1, -1, 6],
-            "targetSum": 10,
-            "expectedOutput" : [11,-1]
+            "targetSum": 10
         },
         2: {
             "array": [4, 6],
-            "targetSum": 10,
-            "expectedOutput" : [4,6]
+            "targetSum": 10
         },
         3: {
             "array": [4, 6, 1],
-            "targetSum": 5,
-            "expectedOutput" : [4,1]
+            "targetSum": 5
         },
         4: {
             "array": [4, 6, 1, -3],
@@ -42,13 +40,11 @@ def getTestCases():
         },
         5: {
             "array": [1, 2, 3, 4, 5, 6, 7, 8, 9],
-            "targetSum": 17,
-            "expectedOutput": [8,9]
+            "targetSum": 17
         },
         6: {
             "array": [1, 2, 3, 4, 5, 6, 7, 8, 9, 15],
-            "targetSum": 18,
-            "expectedOutput": []
+            "targetSum": 18
         },
         7:  {
             "array": [-7, -5, -3, -1, 0, 1, 3, 5, 7],
@@ -58,9 +54,10 @@ def getTestCases():
     }
 
 # This approach fails with this test case = [4, 6, 1, -3], targetSum = 3
-def findTargetNumberFirstApproach(array,targetSum):
+def findTargetNumberSolutionOne(array,targetSum):
     maxNumber = array[0]
     maxAcum = targetSum - maxNumber
+
     for i in range(1,len(array)):
         reminder = 0
         currentNumber = array[i]
@@ -81,26 +78,52 @@ def findTargetNumberFirstApproach(array,targetSum):
 
 """
     Complexity: 
-        Time=O(N)
-        Space=O(N)
+        Time=O(N) --> because we just go through the array only once
+        Space=O(N) --> because we have a hash map
     Solution works as expected
 """
-def findTargetNumber(array,targetSum):
+    #[3, 5, -4, 8, 11, 1, -1, 6], targetSum = 10
+def findTargetNumberSolutionTwo(array,targetSum):
     remindersDict = {}
     firstNumber = array[0]
     reminder = targetSum - firstNumber
-    remindersDict[firstNumber] = targetSum - firstNumber
+    remindersDict[firstNumber] = 1
 
     for i in range(1,len(array)):
         currentNumber = array[i]
         reminder = targetSum - (currentNumber)
 
         if reminder in remindersDict :
-            print(remindersDict)
             return [currentNumber,reminder]
         else:
-            remindersDict[currentNumber] = reminder
+            remindersDict[currentNumber] = 1
     
+    return []
+
+"""
+    # [3,5,-4,8,11,1,-1,6] -> sorted= [-4, left(-1), 1, 3, 5, 6, 8, right(11)]
+    Complexity:
+        Time=O(N log(n))
+        Space=O(1)
+"""
+def findTargetNumberSolutionThree(array,targetSum):
+    arraySorted = sorted(array)
+    leftPointer = 0
+    rightPointer = len(arraySorted) - 1
+    
+    for i in array:
+        leftNumber = arraySorted[leftPointer]
+        rightNumber = arraySorted[rightPointer]
+        reminder =  leftNumber + rightNumber
+        
+        if reminder == targetSum:
+            return [leftNumber,rightNumber]
+
+        if reminder > targetSum:
+            rightPointer-=1
+        elif reminder < targetSum:
+            leftPointer+=1
+
     return []
 
 
@@ -108,7 +131,10 @@ tests = getTestCases()
 for i in tests:
     testArray = tests[i]["array"]
     testTargetSum = tests[i]["targetSum"]
-    mesage = "array:{}, targetSum: {}"
-    result = findTargetNumber(testArray,testTargetSum)
+    message = "array:{}, targetSum: {}".format(testArray,testTargetSum)
+    print(message)
+    result = findTargetNumberSolutionTwo(testArray,testTargetSum)
     print("my output= {}".format(result))
     print("")
+
+# print(findTargetNumberSolutionThree([3,5,-4,8,11,1,-1,6],13))
