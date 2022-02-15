@@ -72,4 +72,3 @@ for i in tests:
     print("squared asc= {}".format(result))
     print("") 
  
-print(sortedSquaredArrayTwo(tests[3]["array"]))
